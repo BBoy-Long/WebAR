@@ -14,17 +14,18 @@
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;-webkit-transform:translate3d(0,0,0);'  ><div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
 	 
 	<div id="Stats-output">
-	</div>
 	<span style="position:absolute; right:0px; bottom:0px;">
 	<button type="button" onclick="zhengMian()">正面</button>
 	<button type="button" onclick="shangMian()">上面</button>
-	</span>>
+	</span>
+	</div>
 </div>
 <script>
+
 	//正面按钮
      function zhengMian() {
-		 //obj.rotation.x=-10;
-		 obj.rotation.set(80,0,0);
+
+		 obj.rotation.set(-Math.PI*0.5,0,0);
 	 }
 	//上面按钮
 	function shangMian() {
@@ -39,6 +40,8 @@
 	    function initStats() {
 	        var stats = new Stats();
 	        stats.setMode(0); // 0: fps, 1: ms
+
+			//stats.setSize( window.innerWidth, window.innerHeight );
 
 	        // Align top-left
 	        stats.domElement.style.position = 'absolute';
@@ -107,9 +110,9 @@
     var arToolkitContext = new THREEx.ArToolkitContext({
         cameraParametersUrl:  'data/camera_para.dat',
         detectionMode: 'mono',
-	maxDetectionRate: 30,
-	canvasWidth: 80*3,
-	canvasHeight: 60*3
+		//maxDetectionRate: 30,
+		//canvasWidth: 80*3,
+		//canvasHeight: 60*3
     })
 
     // initialize it
@@ -132,7 +135,7 @@
     var markerControls = new THREEx.ArMarkerControls(arToolkitContext,camera, {
         type : 'pattern',
 		//替换二维码
-		patternUrl : 'arcode/zhu.patt',
+		patternUrl : 'arcode/pattern-marker.patt',
         //patternUrl : 'arcode/marker89.td',
         //patternUrl : THREEx.ArToolkitContext.baseURL + 'arcode/pattern-marker.patt',
         // as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
@@ -173,11 +176,6 @@
         })
     })
 
-
-
-
-
-
         var onProgress = function ( xhr ) {
 
             if ( xhr.lengthComputable ) {
@@ -189,8 +187,6 @@
             }
 
         };
-
-
 
         var onError = function ( xhr ) { };
 
@@ -205,13 +201,13 @@
         mtlLoader.setPath( 'obj/' );
 
         //材质球
-        mtlLoader.load( 'ar_test.mtl', function( materials ) {
+        mtlLoader.load( 'jj.mtl', function( materials ) {
             materials.preload();
             var objLoader = new THREE.OBJLoader();
             objLoader.setMaterials( materials );
             objLoader.setPath( 'obj/' );
 			//模型
-            objLoader.load( 'ar_test.obj', function ( object ) {
+            objLoader.load( 'jj.obj', function ( object ) {
                 obj=object;
                 scene.add( object );
                 object.position.set(0,0,0);
@@ -220,5 +216,6 @@
                 scene.add(axes);
             }, onProgress, onError );
         });
+
 
 </script></body>
