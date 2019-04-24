@@ -209,13 +209,13 @@
         mtlLoader.setPath( 'obj/' );
 
         //材质球
-        mtlLoader.load( 'jijia_test.mtl', function( materials ) {
+        mtlLoader.load( 'jijia_test1.mtl', function( materials ) {
             materials.preload();
             var objLoader = new THREE.OBJLoader();
             objLoader.setMaterials( materials );
             objLoader.setPath( 'obj/' );
 			//模型
-            objLoader.load( 'jijia_test.obj', function ( object ) {
+            objLoader.load( 'jijia_test1.obj', function ( object ) {
                 obj=object;
                 scene.add( object );
                 object.position.set(0,0,0);
