@@ -8,6 +8,9 @@
 <script src="bulid/ar.js"></script>
 <script src="bulid/MTLLoader.js"></script>
 <script src="bulid/OBJLoader.js"></script>
+<script src="build/DDSLoader.js"></script>
+<script src="build/TGALoader.js"></script>
+<script src="build/FBXLoader.js"></script>
 
 <style>
 </style>
@@ -83,6 +86,8 @@
 
     // 初始化摄像机位置(0，0，0)
      camera=new THREE.Camera();
+     camera.near = 0.1;
+     camera.fa = 2;
     scene.add(camera);
 
     // handle arToolkitSource
@@ -194,28 +199,30 @@
 
 //        THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
+//	       var onError = function (xhr) { };
+//	       THREE.Loader.Handlers.add(/\.tga$/i, new THREE.TGALoader());
 
+//	      THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
         var mtlLoader = new THREE.MTLLoader();
 
         mtlLoader.setPath( 'obj/' );
 
         //材质球
-        mtlLoader.load( 'jj.mtl', function( materials ) {
+        mtlLoader.load( 'jijia_test.mtl', function( materials ) {
             materials.preload();
             var objLoader = new THREE.OBJLoader();
             objLoader.setMaterials( materials );
             objLoader.setPath( 'obj/' );
 			//模型
-            objLoader.load( 'jj.obj', function ( object ) {
+            objLoader.load( 'jijia_test.obj', function ( object ) {
                 obj=object;
                 scene.add( object );
                 object.position.set(0,0,0);
-                object.scale.set(0.0001,0.0001,0.0001);
+                object.scale.set(0.03,0.03,0.03);
                 var axes=new THREE.AxisHelper(10);
                 scene.add(axes);
             }, onProgress, onError );
         });
-
 
 </script></body>
